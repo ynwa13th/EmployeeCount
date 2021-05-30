@@ -1,0 +1,145 @@
+﻿<Window x:Class="EmployeeCount.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeCount"
+        mc:Ignorable="d"
+        Title="Учет сотрудников" 
+        WindowStartupLocation="CenterScreen"
+        Height="450" Width="1000"
+        Background="LightSteelBlue"
+        Loaded="Window_Loaded">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
+                   Text="Учет сотрудников"
+                   FontSize="20"
+                   FontFamily="Comic Sans MS"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+        <ComboBox x:Name ="PositionCombo"     
+                  SelectionChanged="PositionCombo_SelectionChanged"
+                  SelectedIndex="-1"                  
+                  IsReadOnly="True"                 
+                  ItemsSource="{Binding}"
+                  Grid.Row="1" 
+                  Grid.Column="0" 
+                  FontSize="15"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Left"
+                  Margin="5"/>
+        <Label x:Name="PosLabel"
+               Grid.Row="2" 
+               Grid.Column="0"
+               Content="Выберите должность"
+               FontSize="14"
+               FontStyle="Italic"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Top"/>
+
+        <ComboBox x:Name ="DepartmentCombo"  
+                  SelectionChanged="DepartmentCombo_SelectionChanged"
+                  SelectedIndex="-1"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding}"
+                  Grid.Row="1" 
+                  Grid.Column="1" 
+                  FontSize="15"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Left"
+                  Margin="5"/>
+        <Label x:Name="DepLabel"
+               Grid.Row="2" 
+               Grid.Column="1"
+               Content="Выберите подразделение"
+               FontSize="14"
+               FontStyle="Italic"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Top"/>
+
+        <Button x:Name="Show" 
+                Content="Показать" 
+                FontSize="15"
+                FontFamily="Comic Sans MS"
+                FontWeight="Bold"
+                Grid.Row="1" 
+                Grid.Column="2" 
+                Margin="5"
+                Click="Show_Click"/>
+
+        <Button x:Name="Refresh" 
+                Content="Обновить"
+                FontSize="15"
+                FontFamily="Comic Sans MS"
+                FontWeight="Bold"
+                Grid.Row="2" 
+                Grid.Column="2" 
+                Margin="5"
+                Click="Refresh_Click"/>
+
+        <Button x:Name="Add"
+                Content="Добавить сотрудника"
+                FontSize="15"
+                FontFamily="Comic Sans MS"
+                FontWeight="Bold"
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="5"
+                Click="Add_Click"/>
+
+        <Button x:Name="Change"
+                Content="Изменить сотрудника"
+                FontSize="15"
+                FontFamily="Comic Sans MS"
+                FontWeight="Bold"
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="5"
+                Click="Change_Click"/>
+
+        <Button x:Name="Delete"
+                Content="Удалить сотрудника"
+                FontSize="15"
+                FontFamily="Comic Sans MS"
+                FontWeight="Bold"
+                Grid.Row="4"
+                Grid.Column="2"
+                Margin="5"
+                Click="Delete_Click"/>
+
+        <DataGrid x:Name="EmployeesGrid" 
+                  ItemsSource="{Binding}"
+                  AutoGenerateColumns="False"                   
+                  Grid.Row="3" 
+                  Grid.ColumnSpan="3" 
+                  Margin="3" 
+                  HorizontalGridLinesBrush="DarkCyan"
+                  VerticalGridLinesBrush="DarkCyan"
+                  VerticalScrollBarVisibility="Auto"
+                 IsReadOnly="True"
+                 ColumnWidth="180"
+                  HorizontalContentAlignment="Center"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="150" FontSize="15"/>
+                <DataGridTextColumn Binding="{Binding Surname}" Header="Фамилия" Width="150" FontSize="15" />
+                <DataGridTextColumn Binding="{Binding DepName}" Header="Подразделение" Width="150" FontSize="15" />
+                <DataGridTextColumn Binding="{Binding PosName}" Header="Должность" Width="150" FontSize="15" />
+                <DataGridTextColumn Binding="{Binding Comments}" Header="Комментарии" Width="*" FontSize="12" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
